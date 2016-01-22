@@ -200,7 +200,6 @@ TEST_DECLARE   (active)
 TEST_DECLARE   (embed)
 TEST_DECLARE   (async)
 TEST_DECLARE   (async_null_cb)
-TEST_DECLARE   (eintr_handling)
 TEST_DECLARE   (get_currentexe)
 TEST_DECLARE   (process_title)
 TEST_DECLARE   (cwd_and_chdir)
@@ -299,6 +298,8 @@ TEST_DECLARE   (fs_write_multiple_bufs)
 TEST_DECLARE   (fs_read_write_null_arguments)
 TEST_DECLARE   (fs_write_alotof_bufs)
 TEST_DECLARE   (fs_write_alotof_bufs_with_offset)
+TEST_DECLARE   (fs_partial_read)
+TEST_DECLARE   (fs_partial_write)
 TEST_DECLARE   (threadpool_queue_work_simple)
 TEST_DECLARE   (threadpool_queue_work_einval)
 TEST_DECLARE   (threadpool_multiple_event_loops)
@@ -598,7 +599,6 @@ TASK_LIST_START
 
   TEST_ENTRY  (async)
   TEST_ENTRY  (async_null_cb)
-  TEST_ENTRY  (eintr_handling)
 
   TEST_ENTRY  (get_currentexe)
 
@@ -752,6 +752,8 @@ TASK_LIST_START
   TEST_ENTRY  (fs_write_alotof_bufs)
   TEST_ENTRY  (fs_write_alotof_bufs_with_offset)
   TEST_ENTRY  (fs_read_write_null_arguments)
+  TEST_ENTRY  (fs_partial_read)
+  TEST_ENTRY  (fs_partial_write)
   TEST_ENTRY  (threadpool_queue_work_simple)
   TEST_ENTRY  (threadpool_queue_work_einval)
 #if defined(__PPC__) || defined(__PPC64__)  /* For linux PPC and AIX */
