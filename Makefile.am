@@ -276,7 +276,7 @@ test_run_tests_CFLAGS += -D_ALL_SOURCE -D_XOPEN_SOURCE=500 -D_LINUX_SOURCE_COMPA
 endif
 
 if SUNOS
-test_run_tests_CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=500
+test_run_tests_CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600
 endif
 
 
@@ -345,7 +345,7 @@ endif
 
 if SUNOS
 include_HEADERS += include/uv-sunos.h
-libuv_la_CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=500
+libuv_la_CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600
 libuv_la_SOURCES += src/unix/sunos.c
 endif
 

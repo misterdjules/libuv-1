@@ -226,7 +226,7 @@
           'sources': [ 'src/unix/sunos.c' ],
           'defines': [
             '__EXTENSIONS__',
-            '_XOPEN_SOURCE=500',
+            '_XOPEN_SOURCE=600',
           ],
           'link_settings': {
             'libraries': [
