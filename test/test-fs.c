@@ -2700,25 +2700,21 @@ TEST_IMPL(fs_partial_write) {
 static void thread_exec(int fd, char* data, int size, int interval, int doread) {
   const pid_t pid = getpid();
   ssize_t result = 1;
-  int error = 0;
 
-  while (size > 0 && error == 0) {
+  while (size > 0 && result > 0) {
     do {
       if(doread)
         result = write(fd, data, size < interval ? size : interval);
       else
         result = read(fd, data, size < interval ? size : interval);
 
-      error = errno;
-    } while (result == -1 && error == EINTR);
+    } while (result == -1 && errno == EINTR);
 
     kill(pid, SIGUSR1);
-    if (result > 0) {
-      error = 0;
-      size -= result;
-      data += result;
-    }
+    size -= result;
+    data += result;
   }
+
   ASSERT(size == 0);
   ASSERT(result > 0);
 }
