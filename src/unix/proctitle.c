@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern void uv__set_process_title(const char* title);
+extern int uv__set_process_title(const char* title);
 
 static uv_mutex_t process_title_mutex;
 static uv_once_t process_title_mutex_once = UV_ONCE_INIT;

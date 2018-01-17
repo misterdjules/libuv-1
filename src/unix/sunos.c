@@ -27,6 +27,7 @@
 #include <string.h>
 #include <assert.h>
 #include <errno.h>
+#include <limits.h>
 
 #ifndef SUNOS_NO_IFADDRS
 # include <ifaddrs.h>
@@ -818,4 +819,30 @@ void uv_free_interface_addresses(uv_interface_address_t* addresses,
   }
 
   uv__free(addresses);
+}
+
+int uv__set_process_title(const char* title) {
+
+  pid_t pid = -1;
+  int proc_file_fd = -1;
+  char proc_file_path[PATH_MAX];
+  int retval = 0;
+
+  pid = getpid();
+  snprintf(proc_file_path, PATH_MAX, "/proc/%d/psinfo", pid);
+  if ((proc_file_fd = open(proc_file_path, O_WRONLY)) < 0) {
+    retval = -errno;
+    goto cleanup;
+  }
+
+  if (pwrite(proc_file_fd, title, PRARGSZ, offsetof(psinfo_t, pr_psargs))
+    != PRARGSZ) {
+    retval = -errno;
+    goto cleanup;
+  }
+
+cleanup:
+  close(proc_file_fd);
+
+  return retval;
 }

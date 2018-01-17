@@ -944,8 +944,10 @@ void uv_free_interface_addresses(uv_interface_address_t* addresses,
 }
 
 
-void uv__set_process_title(const char* title) {
+int uv__set_process_title(const char* title) {
 #if defined(PR_SET_NAME)
-  prctl(PR_SET_NAME, title);  /* Only copies first 16 characters. */
-#endif
+  return prctl(PR_SET_NAME, title);  /* Only copies first 16 characters. */
+#else
+  return -1;
+#endif /* PR_SET_NAME */
 }
